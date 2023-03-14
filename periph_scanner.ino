@@ -22,7 +22,7 @@ void loop() {
   BLEDevice peripheral = BLE.available();
   if (peripheral) {
     Serial.println("Peripheral found");
-    Serial.print(peripheral.localName());
+    Serial.println(peripheral.localName());
   }
 
   if (peripheral.localName() != "phone") {
