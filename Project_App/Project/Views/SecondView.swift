@@ -21,7 +21,7 @@ struct SecondView: View {
                     BlueToothView()
                 }
                 
-                NavigationLink(destination: Text("Place Hodlder")) {
+                NavigationLink(destination: SpeechRecogView(blueTooth: blueTooth)) {
                     MainButtonView(name_button: "Continue")
                 }
             }

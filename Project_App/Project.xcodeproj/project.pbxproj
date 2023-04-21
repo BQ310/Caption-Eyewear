@@ -16,6 +16,8 @@
 		F28FAE2D29DFE45200ACEC3F /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAE2C29DFE45200ACEC3F /* SecondView.swift */; };
 		F28FAE3429E17BA000ACEC3F /* BlueToothPeripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAE3329E17BA000ACEC3F /* BlueToothPeripView.swift */; };
 		F28FAE4F29E2CA3100ACEC3F /* BLEController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAE3129DFF19E00ACEC3F /* BLEController.swift */; };
+		F28FAE5229E3F77200ACEC3F /* SpeechRecognitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAE5129E3F77200ACEC3F /* SpeechRecognitionController.swift */; };
+		F28FAE5429E40B2200ACEC3F /* SpeechRecogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAE5329E40B2200ACEC3F /* SpeechRecogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		F28FAE2E29DFF14600ACEC3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F28FAE3129DFF19E00ACEC3F /* BLEController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEController.swift; sourceTree = "<group>"; };
 		F28FAE3329E17BA000ACEC3F /* BlueToothPeripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueToothPeripView.swift; sourceTree = "<group>"; };
+		F28FAE5129E3F77200ACEC3F /* SpeechRecognitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionController.swift; sourceTree = "<group>"; };
+		F28FAE5329E40B2200ACEC3F /* SpeechRecogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 				F28FAE2A29DFCBDE00ACEC3F /* MainButtonView.swift */,
 				F28FAE2C29DFE45200ACEC3F /* SecondView.swift */,
 				F28FAE3329E17BA000ACEC3F /* BlueToothPeripView.swift */,
+				F28FAE5329E40B2200ACEC3F /* SpeechRecogView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -96,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				F28FAE3129DFF19E00ACEC3F /* BLEController.swift */,
+				F28FAE5129E3F77200ACEC3F /* SpeechRecognitionController.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -173,9 +179,11 @@
 				F28FAE2929DF9B1300ACEC3F /* BlueToothView.swift in Sources */,
 				F28FAE4F29E2CA3100ACEC3F /* BLEController.swift in Sources */,
 				F28FAE3429E17BA000ACEC3F /* BlueToothPeripView.swift in Sources */,
+				F28FAE5229E3F77200ACEC3F /* SpeechRecognitionController.swift in Sources */,
 				F28FAE2D29DFE45200ACEC3F /* SecondView.swift in Sources */,
 				F28FAE1B29DF996600ACEC3F /* ContentView.swift in Sources */,
 				F28FAE1929DF996600ACEC3F /* ProjectApp.swift in Sources */,
+				F28FAE5429E40B2200ACEC3F /* SpeechRecogView.swift in Sources */,
 				F28FAE2B29DFCBDE00ACEC3F /* MainButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +319,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Project/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app uses Bluetooth.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app uses the microphone";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This app uses speech recognition";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -345,6 +355,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Project/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app uses Bluetooth.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app uses the microphone";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This app uses speech recognition";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

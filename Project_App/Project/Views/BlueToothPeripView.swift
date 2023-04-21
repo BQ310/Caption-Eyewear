@@ -9,9 +9,20 @@ import SwiftUI
 import CoreBluetooth
 struct BlueToothPeripView: View {
     @ObservedObject var blueTooth: BLEController
+    @Environment (\.dismiss) var dismiss
     var body: some View {
         VStack {
-            List(blueTooth.peripherals, id: \.self) { peripheral in Text(peripheral.name ?? "unnamed")
+            List(blueTooth.peripherals, id: \.self) { peripheral in
+                
+                Button(action: {
+                    blueTooth.myCentral.connect(peripheral)
+                    dismiss()
+                }) {
+                    Text(peripheral.name ?? "unnamed")
+                        .foregroundColor(.red)
+                        .font(.headline)
+                        .background(.blue)
+                }
             }
             .navigationTitle("BlueTooth Devices")
         }
@@ -21,6 +32,7 @@ struct BlueToothPeripView: View {
                 blueTooth.startScanningPeripherals()
             }
         }
+        
     }
 }
 
