@@ -6,6 +6,7 @@
 #include <Adafruit_GFX.h> 
 #include <Adafruit_SSD1306.h>
 
+#define BUF_SIZE 256
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 
@@ -48,7 +49,7 @@ void setup() {
 }
 
 void loop() {
-  char buf[100];
+  char buf[BUF_SIZE];
   int counter = 0;
   BLEDevice central = BLE.central();
   delay(500);
@@ -58,13 +59,18 @@ void loop() {
     while(central.connected()){
       if (speechText.written()) {
         
-        /*
-        for (int i = 0; i < speechText.valueLength(); ++i) {
-          buf[counter]=(char(speechText.value()[i]));
+        if (counter > BUF_SIZE - 100) {
+          counter = 0;
         }
-        writeBuf(buf, sizeof(buf)/sizeof(char));
-        */
-        writeStringBLE();
+
+        for (int i = 0; i < speechText.valueLength(); i++) {
+          buf[counter]=(char(speechText.value()[i]));
+          counter++;
+        }
+        Serial.println(counter);
+        writeBuf(buf, counter);
+        
+        //writeStringBLE();
       }
       delay(20);
     }
@@ -76,10 +82,7 @@ void loop() {
 //writes 
 void writeStringBLE(void) {
   display.clearDisplay();
-  display.setTextSize(1);      // Normal 1:1 pixel scale
-  display.setTextColor(SSD1306_WHITE); // Draw white text
   display.setCursor(0, 0);     // Start at top-left corner
-  display.cp437(true);         // Use full 256 char 'Code Page 437' font
   for (int i = 0; i < speechText.valueLength(); i++) {
     display.write(char(speechText.value()[i]));
   }
@@ -119,10 +122,7 @@ void writeString(String s) {
 
 void writeBuf(char* buf, int length) {
   display.clearDisplay();
-  display.setTextSize(1);      // Normal 1:1 pixel scale
-  display.setTextColor(SSD1306_WHITE); // Draw white text
   display.setCursor(0, 0);     // Start at top-left corner
-  display.cp437(true);         // Use full 256 char 'Code Page 437' font
   for (int i = 0; i < length; i++) {
     display.write(buf[i]);
   }
