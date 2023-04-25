@@ -3,7 +3,7 @@
 #include <ArduinoBLE.h>
 #include <SPI.h>
 #include <Wire.h>
-#include <Adafruit_GFX.h>
+#include <Adafruit_GFX.h> 
 #include <Adafruit_SSD1306.h>
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
@@ -45,10 +45,10 @@ void setup() {
   display.setTextSize(1);      // Normal 1:1 pixel scale
   display.setTextColor(SSD1306_WHITE); // Draw white text
   display.cp437(true);
-
 }
 
 void loop() {
+  char buf[100];
   /*
   if (Serial.available() > 0) {
     // read the incoming byte:
@@ -60,6 +60,7 @@ void loop() {
     writeString(buf);
   }
   */
+  int counter = 0;
   BLEDevice central = BLE.central();
   delay(500);
   bool prevResult = false;
@@ -67,9 +68,13 @@ void loop() {
     Serial.println("Connected to Central");
     while(central.connected()){
       if (speechText.written()) {
+        
+        /*
         for (int i = 0; i < speechText.valueLength(); ++i) {
-          Serial.print(char(speechText.value()[i]));
+          buf[counter]=(char(speechText.value()[i]));
         }
+        writeBuf(buf, sizeof(buf)/sizeof(char));
+        */
         writeStringBLE();
       }
       delay(20);
@@ -79,6 +84,7 @@ void loop() {
 
 }
 
+//writes 
 void writeStringBLE(void) {
   display.clearDisplay();
   display.setTextSize(1);      // Normal 1:1 pixel scale
@@ -89,7 +95,7 @@ void writeStringBLE(void) {
     display.write(char(speechText.value()[i]));
   }
   display.display();
-  delay(2000);
+  delay(500);
 }
 
 void testdrawchar(void) {
@@ -132,5 +138,5 @@ void writeBuf(char* buf, int length) {
     display.write(buf[i]);
   }
   display.display();
-  delay(2000);
+  delay(500);
 }
