@@ -49,17 +49,6 @@ void setup() {
 
 void loop() {
   char buf[100];
-  /*
-  if (Serial.available() > 0) {
-    // read the incoming byte:
-    String buf = Serial.readString();
-
-    // say what you got:
-    Serial.print("I received: ");
-    Serial.println(buf);
-    writeString(buf);
-  }
-  */
   int counter = 0;
   BLEDevice central = BLE.central();
   delay(500);
