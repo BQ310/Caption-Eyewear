@@ -1,4 +1,3 @@
-
 #include <ArduinoBLE.h>
 // For Bluetooth
   const char* ServiceUUID = "fd4733c0-def3-11ed-b5ea-0242ac120002";
@@ -37,7 +36,7 @@ void loop() {
 
       /*Text Alignment for screen*/
       if (textAlignment.written()) {
-        if (textAlignment == true) {
+        if (textAlignment.value() == true) {
           // Do Something here
           Serial.println("Text Alignment lower three rows.");
         } else {
