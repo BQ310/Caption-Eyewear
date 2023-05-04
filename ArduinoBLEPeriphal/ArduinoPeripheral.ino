@@ -3,10 +3,11 @@
   const char* ServiceUUID = "fd4733c0-def3-11ed-b5ea-0242ac120002";
   const char* SpeechTextCharUUID = "fd4733c1-def3-11ed-b5ea-0242ac120002";
   const char* TextAlignmentCharUUID = "fd4733c2-def3-11ed-b5ea-0242ac120002";
+  const char* TextSpeedCharUUID = "fd4733c3-def3-11ed-b5ea-0242ac120002";
   BLEService ExBLE(ServiceUUID);
   BLECharacteristic speechText(SpeechTextCharUUID, BLEWrite, 50, false);
   BLEBoolCharacteristic textAlignment(TextAlignmentCharUUID, BLEWrite);  // false:  Upper 3 rows,   True:  Lower 3 rows
-
+  BLEBoolCharacteristic textSpeed(TextSpeedCharUUID, BLEWrite); // false: Normal   True: Slow
 void setup() {
   // put your setup code here, to run once:
 
@@ -22,6 +23,7 @@ void setup() {
   BLE.setAdvertisedService(ExBLE);
   ExBLE.addCharacteristic(speechText);
   ExBLE.addCharacteristic(textAlignment);
+  ExBle.addCharacteristic(textSpeed);
   BLE.addService(ExBLE);
   BLE.advertise();
 }
@@ -45,6 +47,18 @@ void loop() {
         }
       }
 
+
+      /*Text Speed for screen*/
+      if (textSpeed.written()) {
+        if (textSpeed.value() == true) {
+          // Do Something here
+          Serial.println("Text Speed Char Slow");
+        } else {
+          // Do Something here
+          Serial.println("Text Speed Char Normal");
+        }
+      }
+      
       /*Speech to text from phone */ 
       if (speechText.written()) {
         for (int i = 0; i < speechText.valueLength(); ++i) {
