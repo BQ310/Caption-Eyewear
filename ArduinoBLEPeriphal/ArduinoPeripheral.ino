@@ -23,7 +23,7 @@ void setup() {
   BLE.setAdvertisedService(ExBLE);
   ExBLE.addCharacteristic(speechText);
   ExBLE.addCharacteristic(textAlignment);
-  ExBle.addCharacteristic(textSpeed);
+  ExBLE.addCharacteristic(textSpeed);
   BLE.addService(ExBLE);
   BLE.advertise();
 }
