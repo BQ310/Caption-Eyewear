@@ -19,19 +19,18 @@ int scroll_speed = 0;
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 
 #define OLED_RESET -1		// Reset pin # (or -1 if sharing Arduino reset pin)
-#define SCREEN_ADDRESS 0x7A ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+#define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-queue_t textbuf = {0, 0, QUEUE_SIZE, malloc(sizeof(void *) * QUEUE_SIZE)};
+myqueue textbuf = {0, 0, QUEUE_SIZE, (void**) malloc(sizeof(void *) * QUEUE_SIZE)};
 
 void loop()
 {
-	if (textbuf.size < 10)
+	if (getsize(&textbuf) < 10)
 	{
-		push(&textbuf, "This is a test...");
-		push(&textbuf, "This is aASFDADA...");
-		push(&textbuf, "ThASDFSAFSAFSADFis is a test...");
-		push(&textbuf, "ThisADSFSAFSF is a test...");
+  	mypush(&textbuf, (void*) "This is aASFDADA...");
+		mypush(&textbuf, (void*) "ThASDFSAFSAFSADFis is a test...");
+		mypush(&textbuf, (void*) "ThisADSFSAFSF is a test...");
 	}
 
 	scroll_text();
@@ -46,20 +45,33 @@ void setup()
 		for (;;)
 			;
 	}
+
+  display.display();
+  display.setTextSize(1);              // Normal 1:1 pixel scale
+  display.setTextColor(SSD1306_WHITE); // Draw white text
+  display.cp437(true);
 }
 
 void scroll_text()
 {
-	char *t = (char *)pop(&textbuf);
-	if (!t)
+	char *t = (char *)mypop(&textbuf);
+	if (t == NULL)
 	{
+    Serial.println("Null pointer!\n");
 		return;
 	}
+
+  Serial.println(t);
 
 	display.clearDisplay();
 	display.setCursor(0, 0);
 
-	display.println(t);
+  Serial.println("Updating screen\n");
+	display.println(F(t));
+
+  display.display();
+
+  free(t);
 
 	delay(get_scroll());
 }
@@ -69,14 +81,14 @@ int get_scroll()
 	switch (scroll_speed)
 	{
 	case 0:
-		return 10;
+		return 1000;
 	case 1:
-		return 20;
+		return 2000;
 	case 2:
-		return 30;
+		return 3000;
 
 	default:
-		return 10;
+		return 1000;
 		break;
 	}
 }

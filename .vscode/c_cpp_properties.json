@@ -2,7 +2,11 @@
   "configurations": [
     {
       "name": "Win32",
-      "includePath": ["${workspaceFolder}/**"],
+      "includePath": [
+        "${workspaceFolder}/**",
+        "C:\\Users\\lcode\\OneDrive\\Documents\\Arduino\\libraries",
+        "C:\\Users\\lcode\\AppData\\Local\\Arduino15\\libraries"
+      ],
       "defines": ["_DEBUG", "UNICODE", "_UNICODE"]
     }
   ],
