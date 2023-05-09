@@ -8,10 +8,27 @@ typedef struct myqueue
 	size_t head;
 	size_t tail;
 	size_t size;
-	void **data;
+	char **data;
 } myqueue;
 
-int mypush(myqueue *q, void *data)
+int get_scroll(int scroll_speed)
+{
+	switch (scroll_speed)
+	{
+	case 0:
+		return 1000;
+	case 1:
+		return 500;
+	case 2:
+		return 100;
+
+	default:
+		return 1000;
+		break;
+	}
+}
+
+int mypush(myqueue *q, char *data)
 {
 	if (((q->head + 1) % q->size) == q->tail)
 	{
@@ -23,26 +40,31 @@ int mypush(myqueue *q, void *data)
 	return 0;
 }
 
-void *mypop(myqueue *q)
+char *mypop(myqueue *q)
 {
 	if (q->tail == q->head)
 	{
 		return NULL;
 	}
 
-	void *handle = q->data[q->tail];
+	char *handle = q->data[q->tail];
 	q->data[q->tail] = NULL;
 	q->tail = (q->tail + 1) % q->size;
 	return handle;
 }
 
-int getsize(myqueue *q){
+int getsize(myqueue *q)
+{
 
-  int res = q->tail - q->head;
-  if(res == NULL){
+  if(q == NULL){
     return 0;
-  } 
-  return res;
+  }
+
+  if(q->tail == NULL || q->head == NULL){
+    return 0;
+  }
+    
+	return q->tail - q->head;
 }
 
 #endif

@@ -10,9 +10,11 @@ OLED Program to test projection
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
+#include <Queue.h>
+
 #define QUEUE_SIZE 16
 
-int scroll_speed = 0;
+#define TEXTSPEED 0
 
 #define BUF_SIZE 256
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
@@ -22,15 +24,22 @@ int scroll_speed = 0;
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-myqueue textbuf = {0, 0, QUEUE_SIZE, (void**) malloc(sizeof(void *) * QUEUE_SIZE)};
+myqueue textbuf = {0, 0, QUEUE_SIZE, (char **)malloc(sizeof(char *) * QUEUE_SIZE)};
+char buf[32];
+int count = 0;
 
 void loop()
 {
-	if (getsize(&textbuf) < 10)
+  // clear buf
+  memset(&buf[0], 0, sizeof(buf));
+
+	if (getsize(&textbuf) < QUEUE_SIZE)
 	{
-  	mypush(&textbuf, (void*) "This is aASFDADA...");
-		mypush(&textbuf, (void*) "ThASDFSAFSAFSADFis is a test...");
-		mypush(&textbuf, (void*) "ThisADSFSAFSF is a test...");
+
+    count++;
+    snprintf(buf, 32, "This is a test: Line %i", count);
+    mypush(&textbuf, buf);
+
 	}
 
 	scroll_text();
@@ -46,10 +55,10 @@ void setup()
 			;
 	}
 
-  display.display();
-  display.setTextSize(1);              // Normal 1:1 pixel scale
-  display.setTextColor(SSD1306_WHITE); // Draw white text
-  display.cp437(true);
+	display.display();
+	display.setTextSize(1);				 // Normal 1:1 pixel scale
+	display.setTextColor(SSD1306_WHITE); // Draw white text
+	display.cp437(true);
 }
 
 void scroll_text()
@@ -57,38 +66,19 @@ void scroll_text()
 	char *t = (char *)mypop(&textbuf);
 	if (t == NULL)
 	{
-    Serial.println("Null pointer!\n");
+		Serial.println("No text to write!\n");
 		return;
 	}
 
-  Serial.println(t);
+	Serial.println(t);
 
 	display.clearDisplay();
 	display.setCursor(0, 0);
 
-  Serial.println("Updating screen\n");
+	Serial.println("Updating screen\n");
 	display.println(F(t));
 
-  display.display();
+	display.display();
 
-  free(t);
-
-	delay(get_scroll());
-}
-
-int get_scroll()
-{
-	switch (scroll_speed)
-	{
-	case 0:
-		return 1000;
-	case 1:
-		return 2000;
-	case 2:
-		return 3000;
-
-	default:
-		return 1000;
-		break;
-	}
+	delay(get_scroll(TEXTSPEED));
 }

@@ -1,4 +1,4 @@
-// Brian Quach
+// Brian Quach & Alonso Diaz
 // takes input from serial monitor and outputs to oled
 #include <ArduinoBLE.h>
 #include <SPI.h>
@@ -18,6 +18,13 @@ const char *ServiceUUID = "fd4733c0-def3-11ed-b5ea-0242ac120002";
 const char *examplCharUUID = "fd4733c1-def3-11ed-b5ea-0242ac120002";
 BLEService ExBLE(ServiceUUID);
 BLECharacteristic speechText(examplCharUUID, BLEWrite, 50, false);
+
+// TEXT QUEUE
+#include "queue.h"
+#define QUEUE_SIZE 16
+// #define TEXT_SPEED 0 // 0 - 1000ms, 1 - 500ms, 2 - 100 ms
+myqueue textbuf = {0, 0, QUEUE_SIZE, (char **)malloc(sizeof(char *) * QUEUE_SIZE)};
+int text_speed = 0;
 
 void setup()
 {
@@ -78,11 +85,22 @@ void loop()
           counter++;
         }
         Serial.println(counter);
-        writeBuf(buf, counter);
 
-        // writeStringBLE();
+        // Push
+
+        mypush(&textbuf, buf);
+
+        // writeBuf(buf, counter);
       }
-      delay(20);
+
+      // Also update text speed
+      // if (textSpeed.written())
+      // {
+      //   text_speed = int(text_speed.value());
+      // }
+    
+      // write text from queue to OLED
+      writeText();
     }
   }
 }
@@ -135,6 +153,22 @@ void writeString(String s)
   delay(2000);
 }
 
+void writeText()
+{
+  char *t = (char *)mypop(&textbuf);
+  if (t == NULL)
+  {
+    Serial.println("Null pointer!");
+    return;
+  }
+
+  Serial.println(t);
+
+  writeBuf(t, strlen(t));
+
+  delay(get_scroll(text_speed));
+}
+
 void writeBuf(char *buf, int length)
 {
   display.clearDisplay();
@@ -144,5 +178,4 @@ void writeBuf(char *buf, int length)
     display.write(buf[i]);
   }
   display.display();
-  delay(500);
 }
