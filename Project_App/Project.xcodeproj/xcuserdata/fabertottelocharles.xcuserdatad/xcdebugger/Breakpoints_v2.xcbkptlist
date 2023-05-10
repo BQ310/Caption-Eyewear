@@ -14,26 +14,90 @@
             filePath = "Project/SpeechRecognitionController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "prepareEngine()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5BEE9110-DCD9-4BC5-8B09-2839BF71F521 - 170bb39698941cc7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Project.SpeechRecognizer.prepareEngine() throws -&gt; (__C.AVAudioEngine, __C.SFSpeechAudioBufferRecognitionRequest)"
+                  moduleName = "Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fabertottelocharles/Documents/Project_App/Project/Project/SpeechRecognitionController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "5BEE9110-DCD9-4BC5-8B09-2839BF71F521 - 170bb39698941cc7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Project.SpeechRecognizer.prepareEngine() throws -&gt; (__C.AVAudioEngine, __C.SFSpeechAudioBufferRecognitionRequest)"
+                  moduleName = "Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fabertottelocharles/Documents/Project_App/Project/Project/SpeechRecognitionController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "127">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "308D748B-5A5A-4EA0-A5FF-F85AD693B24B"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Project/SpeechRecognitionController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "prepareEngine()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "308D748B-5A5A-4EA0-A5FF-F85AD693B24B - 170bb39698941cc7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Project.SpeechRecognizer.prepareEngine() throws -&gt; (__C.AVAudioEngine, __C.SFSpeechAudioBufferRecognitionRequest)"
+                  moduleName = "Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fabertottelocharles/Documents/Project_App/Project/Project/SpeechRecognitionController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "127">
+               </Location>
+               <Location
+                  uuid = "308D748B-5A5A-4EA0-A5FF-F85AD693B24B - 170bb39698941cc7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Project.SpeechRecognizer.prepareEngine() throws -&gt; (__C.AVAudioEngine, __C.SFSpeechAudioBufferRecognitionRequest)"
+                  moduleName = "Project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fabertottelocharles/Documents/Project_App/Project/Project/SpeechRecognitionController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "60">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

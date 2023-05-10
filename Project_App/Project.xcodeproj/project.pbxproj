@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F25C03072A064D8500698EEF /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C03062A064D8400698EEF /* PopUpView.swift */; };
+		F25C03092A082D3A00698EEF /* SavedFileVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C03082A082D3A00698EEF /* SavedFileVIew.swift */; };
+		F25C030B2A083CB200698EEF /* ContentFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C030A2A083CB200698EEF /* ContentFileView.swift */; };
 		F28FAE1929DF996600ACEC3F /* ProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAE1829DF996600ACEC3F /* ProjectApp.swift */; };
 		F28FAE1B29DF996600ACEC3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAE1A29DF996600ACEC3F /* ContentView.swift */; };
 		F28FAE1D29DF996800ACEC3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F28FAE1C29DF996800ACEC3F /* Assets.xcassets */; };
@@ -18,9 +21,16 @@
 		F28FAE4F29E2CA3100ACEC3F /* BLEController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAE3129DFF19E00ACEC3F /* BLEController.swift */; };
 		F28FAE5229E3F77200ACEC3F /* SpeechRecognitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAE5129E3F77200ACEC3F /* SpeechRecognitionController.swift */; };
 		F28FAE5429E40B2200ACEC3F /* SpeechRecogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAE5329E40B2200ACEC3F /* SpeechRecogView.swift */; };
+		F28FAEA429FBB5EE00ACEC3F /* NoiseMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAEA329FBB5ED00ACEC3F /* NoiseMeterView.swift */; };
+		F28FAEA629FBCD1C00ACEC3F /* SignalProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAEA529FBCD1C00ACEC3F /* SignalProcessing.swift */; };
+		F28FAEAA29FE513B00ACEC3F /* LineSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAEA929FE513B00ACEC3F /* LineSelectorView.swift */; };
+		F28FAEAC29FE8ED300ACEC3F /* SpeechEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FAEAB29FE8ED300ACEC3F /* SpeechEditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F25C03062A064D8400698EEF /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
+		F25C03082A082D3A00698EEF /* SavedFileVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFileVIew.swift; sourceTree = "<group>"; };
+		F25C030A2A083CB200698EEF /* ContentFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFileView.swift; sourceTree = "<group>"; };
 		F28FAE1529DF996600ACEC3F /* Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28FAE1829DF996600ACEC3F /* ProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectApp.swift; sourceTree = "<group>"; };
 		F28FAE1A29DF996600ACEC3F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,6 +44,10 @@
 		F28FAE3329E17BA000ACEC3F /* BlueToothPeripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueToothPeripView.swift; sourceTree = "<group>"; };
 		F28FAE5129E3F77200ACEC3F /* SpeechRecognitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionController.swift; sourceTree = "<group>"; };
 		F28FAE5329E40B2200ACEC3F /* SpeechRecogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecogView.swift; sourceTree = "<group>"; };
+		F28FAEA329FBB5ED00ACEC3F /* NoiseMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMeterView.swift; sourceTree = "<group>"; };
+		F28FAEA529FBCD1C00ACEC3F /* SignalProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalProcessing.swift; sourceTree = "<group>"; };
+		F28FAEA929FE513B00ACEC3F /* LineSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSelectorView.swift; sourceTree = "<group>"; };
+		F28FAEAB29FE8ED300ACEC3F /* SpeechEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +107,12 @@
 				F28FAE2C29DFE45200ACEC3F /* SecondView.swift */,
 				F28FAE3329E17BA000ACEC3F /* BlueToothPeripView.swift */,
 				F28FAE5329E40B2200ACEC3F /* SpeechRecogView.swift */,
+				F28FAEA329FBB5ED00ACEC3F /* NoiseMeterView.swift */,
+				F28FAEA929FE513B00ACEC3F /* LineSelectorView.swift */,
+				F28FAEAB29FE8ED300ACEC3F /* SpeechEditView.swift */,
+				F25C03062A064D8400698EEF /* PopUpView.swift */,
+				F25C03082A082D3A00698EEF /* SavedFileVIew.swift */,
+				F25C030A2A083CB200698EEF /* ContentFileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -102,6 +122,7 @@
 			children = (
 				F28FAE3129DFF19E00ACEC3F /* BLEController.swift */,
 				F28FAE5129E3F77200ACEC3F /* SpeechRecognitionController.swift */,
+				F28FAEA529FBCD1C00ACEC3F /* SignalProcessing.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -181,10 +202,17 @@
 				F28FAE3429E17BA000ACEC3F /* BlueToothPeripView.swift in Sources */,
 				F28FAE5229E3F77200ACEC3F /* SpeechRecognitionController.swift in Sources */,
 				F28FAE2D29DFE45200ACEC3F /* SecondView.swift in Sources */,
+				F28FAEA429FBB5EE00ACEC3F /* NoiseMeterView.swift in Sources */,
+				F25C030B2A083CB200698EEF /* ContentFileView.swift in Sources */,
 				F28FAE1B29DF996600ACEC3F /* ContentView.swift in Sources */,
+				F25C03072A064D8500698EEF /* PopUpView.swift in Sources */,
 				F28FAE1929DF996600ACEC3F /* ProjectApp.swift in Sources */,
+				F28FAEAC29FE8ED300ACEC3F /* SpeechEditView.swift in Sources */,
 				F28FAE5429E40B2200ACEC3F /* SpeechRecogView.swift in Sources */,
+				F28FAEAA29FE513B00ACEC3F /* LineSelectorView.swift in Sources */,
+				F28FAEA629FBCD1C00ACEC3F /* SignalProcessing.swift in Sources */,
 				F28FAE2B29DFCBDE00ACEC3F /* MainButtonView.swift in Sources */,
+				F25C03092A082D3A00698EEF /* SavedFileVIew.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,7 +269,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -295,7 +323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -326,7 +354,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -362,7 +390,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
