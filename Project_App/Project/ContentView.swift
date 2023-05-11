@@ -9,12 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showSecondScreen: Bool = false
+    @StateObject var bluetooth = BLEController()
+    let backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+    init() {
+//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.init(.black)]
+
+    }
     var body: some View {
         
         NavigationView {
             ZStack {
-                Color("ThemeColor")
-                    .ignoresSafeArea(.all)
+                Rectangle()
+                    .fill(Color(backgroundColor))
+                    .ignoresSafeArea()
                 
                 VStack {
                     Image(systemName: "eyeglasses")
@@ -30,14 +37,13 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    NavigationLink(destination: SecondView()) {
+                    NavigationLink(destination: SecondView(blueTooth: bluetooth)) {
                         MainButtonView(name_button: "Start")
                     }
-                    
                     Spacer()
                 }
             }
-        }
+        }.navigationViewStyle(.stack)
     }
 }
 
