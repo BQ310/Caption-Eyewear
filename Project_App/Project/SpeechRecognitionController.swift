@@ -26,6 +26,7 @@ actor SpeechRecognizer: ObservableObject {
     }
     
     @MainActor @Published var transcript: String = ""
+    @MainActor @Published var dB: Float = 0
     
     private var audioEngine: AVAudioEngine?
     private var request: SFSpeechAudioBufferRecognitionRequest?
@@ -37,6 +38,7 @@ actor SpeechRecognizer: ObservableObject {
      requests access to the speech recognizer and the microphone.
      */
     init() {
+        print("Initializing SpeechRecongition")
         recognizer = SFSpeechRecognizer()
         guard recognizer != nil else {
             transcribe(RecognizerError.nilRecognizer)
@@ -71,6 +73,7 @@ actor SpeechRecognizer: ObservableObject {
     
     @MainActor func stopTranscribing() {
         Task {
+            dB = 0
             await reset()
         }
     }
@@ -88,7 +91,7 @@ actor SpeechRecognizer: ObservableObject {
         }
         
         do {
-            let (audioEngine, request) = try Self.prepareEngine()
+            let (audioEngine, request) = try self.prepareEngine()
             self.audioEngine = audioEngine
             self.request = request
             self.task = recognizer.recognitionTask(with: request, resultHandler: { [weak self] result, error in
@@ -109,20 +112,26 @@ actor SpeechRecognizer: ObservableObject {
         task = nil
     }
     
-    private static func prepareEngine() throws -> (AVAudioEngine, SFSpeechAudioBufferRecognitionRequest) {
+    private func prepareEngine() throws -> (AVAudioEngine, SFSpeechAudioBufferRecognitionRequest) {
         let audioEngine = AVAudioEngine()
         
         let request = SFSpeechAudioBufferRecognitionRequest()
         request.shouldReportPartialResults = true
         
         let audioSession = AVAudioSession.sharedInstance()
-        try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .duckOthers)
+        try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .allowBluetoothA2DP)
         try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         let inputNode = audioEngine.inputNode
-        
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             request.append(buffer)
+            Task {
+                let loudness = await SignalProcessing.rms(buffer: buffer)
+                //print(loudness)
+                await MainActor.run {
+                    self.dB = loudness
+                }
+            }
         }
         audioEngine.prepare()
         try audioEngine.start()
@@ -139,11 +148,16 @@ actor SpeechRecognizer: ObservableObject {
         }
         
         if let result{
-            print(result.isFinal)
             transcribe(result.bestTranscription.formattedString)
         }
     }
     
+    nonisolated private func setLoudness(_ loudness: Float) {
+        Task { @MainActor in
+            //print("Here: \(loudness)")
+            dB = loudness
+        }
+    }
     
     nonisolated private func transcribe(_ message: String) {
         Task { @MainActor in

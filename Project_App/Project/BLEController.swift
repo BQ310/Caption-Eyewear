@@ -8,24 +8,37 @@
 import Foundation
 import CoreBluetooth
 
+struct BLEPeriphData: Equatable, Hashable, Identifiable{
+    let id = UUID()
+    let name: String
+    let peripheral: CBPeripheral
+    init(_name: String, _peripheral: CBPeripheral) {
+        name = _name
+        peripheral = _peripheral
+    }
+}
 
 class BLEController: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     var myCentral: CBCentralManager!
-    var peripherals: [CBPeripheral] = [] // List of peripherals found
+    @Published var peripherals: [BLEPeriphData] = [] // List of peripherals found
     var connectedPeripheral: CBPeripheral? // nil
-    var importantChar: CBCharacteristic?
+    var textSpeechChar: CBCharacteristic?
+    var textPlacementChar: CBCharacteristic?
+    var textSpeed: CBCharacteristic?
     var mainService: CBService?
     
-    var scanning: Bool = false // Scanning For Peripherals
+    @Published var scanning: Bool = false // Scanning For Peripherals
     let serviceUUID: CBUUID = CBUUID(string: "fd4733c0-def3-11ed-b5ea-0242ac120002") // Glasses Service UUID
-    let serviceCHARUUID: CBUUID = CBUUID(string: "fd4733c1-def3-11ed-b5ea-0242ac120002") // Glasses Service char UUID
+    let textSpeechCHARUUID: CBUUID = CBUUID(string: "fd4733c1-def3-11ed-b5ea-0242ac120002") // Glasses TextSpeech char UUID
+    let textPlacementCHARUUID: CBUUID = CBUUID(string: "fd4733c2-def3-11ed-b5ea-0242ac120002") // Text Alignment char
+    let speedTextCHARUUID: CBUUID = CBUUID(string: "fd4733c3-def3-11ed-b5ea-0242ac120002") // Text Alignment char
     @Published var peripheralConnected: Bool = false; //  IS peripheral connected VIEW UI changed
-    @Published var peripheralNames: [String] = [] // Peripheral Names VIEW UI changed
     
     override init() {
         super.init()
         myCentral = CBCentralManager(delegate: self, queue: nil)
+        print("BLUETOOTH CLASS INIT")
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -53,9 +66,15 @@ class BLEController: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
     // FOUND PERIPHERALS
     /*If a periperal is found saved its name and appends it to self.peripheral*/
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        if !peripherals.contains(peripheral) {
-            self.peripherals.append(peripheral)
-            self.peripheralNames.append(peripheral.name ?? "unnamed")
+        print("Found peripheral")
+        print(advertisementData)
+        let nameOfDevice = advertisementData["kCBAdvDataLocalName"] as? String ?? "unnamed"
+        if (nameOfDevice == "unnamed") {
+            return
+        }
+        let device = BLEPeriphData(_name: nameOfDevice, _peripheral: peripheral)
+        if !peripherals.contains(where: {$0 == device}) {
+            self.peripherals.append(device)
         }
     }
     
@@ -87,7 +106,6 @@ class BLEController: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
         self.peripheralConnected = false
         self.connectedPeripheral = nil
         self.peripherals = []
-        self.peripheralNames = []
         
     }
     
@@ -99,12 +117,13 @@ class BLEController: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         self.mainService = peripheral.services?.first
         print("Discovered Peripheral Services")
+        //print(peripheral)
         if let services = peripheral.services {
             print(services)
             if !services.isEmpty {
                 print("Discovering Characteristics of Services")
                 for service in services {
-                    peripheral.discoverCharacteristics([serviceCHARUUID], for: service)
+                    peripheral.discoverCharacteristics([textSpeechCHARUUID, textPlacementCHARUUID, speedTextCHARUUID], for: service)
                 }
             }
         }
@@ -117,7 +136,15 @@ class BLEController: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
             return
         }
         print("Found Characteristic")
-        self.importantChar = service.characteristics?.first
+        for char in service.characteristics! {
+            if char.uuid == textSpeechCHARUUID {
+                textSpeechChar = char
+            } else if char.uuid == textPlacementCHARUUID {
+                textPlacementChar = char
+            } else if char.uuid == textSpeechCHARUUID {
+                textSpeed = char
+            }
+        }
     }
     
     // WRITING VALUE TO CHARACTERISTIC CHECK
