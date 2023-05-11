@@ -4,25 +4,12 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/home/albino/Arduino/libraries/**"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ]
-        },
-        {
-            "name": "Arduino",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "/home/albino/Arduino/**"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/clang",
-            "cStandard": "c17",
-            "cppStandard": "c++14",
-            "intelliSenseMode": "linux-clang-x64"
         }
     ],
     "version": 4
