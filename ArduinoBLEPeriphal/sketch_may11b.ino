@@ -21,7 +21,6 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
   const char* ServiceUUID = "fd4733c0-def3-11ed-b5ea-0242ac120002";
   const char* SpeechTextCharUUID = "fd4733c1-def3-11ed-b5ea-0242ac120002";
   const char* TextAlignmentCharUUID = "fd4733c2-def3-11ed-b5ea-0242ac120002";
-  const char* TextSpeedCharUUID = "fd4733c3-def3-11ed-b5ea-0242ac120002";
   BLEService ExBLE(ServiceUUID);
   BLECharacteristic speechText(SpeechTextCharUUID, BLEWrite, 100, false);
   BLEBoolCharacteristic textAlignment(TextAlignmentCharUUID, BLEWrite);  // false:  Upper 3 rows,   True:  Lower 3 rows
