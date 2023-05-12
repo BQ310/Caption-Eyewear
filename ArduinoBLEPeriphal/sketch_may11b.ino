@@ -144,13 +144,7 @@ void writeBuf(const unsigned char *buffer, unsigned int length)
 {
   display.clearDisplay();
   display.setCursor(0, cursorPlacement); // Start at top-left corner
-  int nextLine = cursorPlacement;
-  int screenWidth = 128; // Width of your OLED screen
-  char currentLine[screenWidth/6 + 1]; // Current line of text being constructed (plus one for null termination)
-  int currentLineLength = 0; // Length of the current line of text
-  int extraChars = 0;
-  int extraSpace = 0;
-  int currentLineSize;
+  int currentLineSize = 0;
   bool removeSpace = false;
   for (unsigned int i = 0; i != length; i++) {
     char currentChar = buffer[i];
