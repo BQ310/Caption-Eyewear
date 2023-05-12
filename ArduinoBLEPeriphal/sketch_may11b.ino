@@ -75,11 +75,9 @@ void loop()
         if (textAlignment.value() == true) {
           // Do Something here
           cursorPlacement = BOTTOM;
-          Serial.println("Text Alignment lower three rows.");
         } else {
           // Do Something here
           cursorPlacement = TOP;
-          Serial.println("Text Alignment upper three rows.");
         }
         
         if (!speechText.written()) {
