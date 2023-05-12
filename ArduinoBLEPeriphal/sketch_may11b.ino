@@ -25,7 +25,6 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
   BLEService ExBLE(ServiceUUID);
   BLECharacteristic speechText(SpeechTextCharUUID, BLEWrite, 100, false);
   BLEBoolCharacteristic textAlignment(TextAlignmentCharUUID, BLEWrite);  // false:  Upper 3 rows,   True:  Lower 3 rows
-  BLEBoolCharacteristic textSpeed(TextSpeedCharUUID, BLEWrite); // false: Normal   True: Slow
 
 
 void setup()
@@ -48,7 +47,6 @@ void setup()
   BLE.setAdvertisedService(ExBLE);
   ExBLE.addCharacteristic(speechText);
   ExBLE.addCharacteristic(textAlignment);
-  ExBLE.addCharacteristic(textSpeed);
   BLE.addService(ExBLE);
   BLE.advertise();
 
@@ -87,21 +85,6 @@ void loop()
         
         if (!speechText.written()) {
           writeBuf(speechText.value(), speechText.valueLength());
-        }
-      }
-
-
-      /*Text Speed for screen*/
-      if (textSpeed.written()) {
-        if (textSpeed.value() == true) {
-          // Do Something here
-          speedText = SLOW;
-          
-          Serial.println("Text Speed Char Slow");
-        } else {
-          // Do Something here
-          speedText = FAST;
-          Serial.println("Text Speed Char Normal");
         }
       }
       
@@ -169,18 +152,41 @@ void writeBuf(const unsigned char *buffer, unsigned int length)
   char currentLine[screenWidth/6 + 1]; // Current line of text being constructed (plus one for null termination)
   int currentLineLength = 0; // Length of the current line of text
   int extraChars = 0;
+  int extraSpace = 0;
+  int currentLineSize;
+  bool removeSpace = false;
   for (unsigned int i = 0; i != length; i++) {
     char currentChar = buffer[i];
-    if ((i + extraChars) % 20 == 0 && i != 0 && currentChar != ' ') {
-      Serial.println("Hello");
+    Serial.print(currentChar);
+    Serial.print(" ");
+    Serial.print(i);
+    Serial.print(" ");
+    Serial.println(currentLineSize);
+    if (currentLineSize == 20) {
+      if (currentChar == ' ') {
+        display.write(currentChar);
+        currentLineSize = 0;
+        continue;
+      }
       if (i + 1 < length) {
         if (buffer[i+1] != ' ') {
           //extraChars += 1;
           display.write(buffer[i-1] == ' '? ' ': '-');
           display.write(currentChar);
+          currentLineSize = 1;
+        } else {
+          display.write(currentChar);
+          currentLineSize = 0;
         }
+      } else {
+        display.write(currentChar);
+        currentLineSize = 0;
       }
     } else {
+      if (currentLineSize == 0 && currentChar == ' ') {
+          continue;
+        }
+      currentLineSize += 1;
       display.write(currentChar);
     }
   }
