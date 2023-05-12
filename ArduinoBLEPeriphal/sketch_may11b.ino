@@ -156,11 +156,6 @@ void writeBuf(const unsigned char *buffer, unsigned int length)
   bool removeSpace = false;
   for (unsigned int i = 0; i != length; i++) {
     char currentChar = buffer[i];
-    Serial.print(currentChar);
-    Serial.print(" ");
-    Serial.print(i);
-    Serial.print(" ");
-    Serial.println(currentLineSize);
     if (currentLineSize == 20) {
       if (currentChar == ' ') {
         display.write(currentChar);
