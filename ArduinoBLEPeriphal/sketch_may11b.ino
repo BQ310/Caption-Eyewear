@@ -14,7 +14,7 @@
 #define FAST 200
 #define SLOW 500
 #define TOP 0
-#define BOTTOM 40
+#define BOTTOM 32
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 // For Bluetooth
